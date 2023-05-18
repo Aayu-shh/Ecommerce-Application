@@ -1,4 +1,13 @@
+const fs = require('fs');
+const path = require('path');
+
 const Product = require('../models/product');
+
+const p = path.join(
+  path.dirname(process.mainModule.filename),
+  'data',
+  'products.json'
+);
 
 exports.getAddProduct = (req, res, next) => {
   res.render('admin/edit-product', {
@@ -48,6 +57,13 @@ exports.postEditProduct = (req,res,next)=>{
   updatedProduct.save();
   res.redirect(`/admin/products`);
 };
+
+exports.postDeleteProduct = (req,res,next) => {
+  const prodId = req.params.productId;
+
+  Product.deleteProductById(prodId);
+    res.redirect('/admin/products');
+}
 
 exports.getProducts = (req, res, next) => {
   Product.fetchAll(products => {

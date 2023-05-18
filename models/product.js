@@ -47,6 +47,25 @@ module.exports = class Product {
     });
   }
   
+  static deleteProductById(prodId){
+    Product.findById(prodId, product => {
+      Product.fetchAll(products => {
+        const deleteIndex = products.findIndex(product => product.id == prodId);
+        products[deleteIndex] = null;
+        let updatedProducts = [];
+        let i = 0;
+        products.forEach(product => {
+          if (product) {
+            updatedProducts[i] = product;
+            i++;
+          }
+        })
+        fs.writeFile(p, JSON.stringify(updatedProducts), err => {
+          console.log(err);
+        });
+      })
+    })
+  }
 
   static fetchAll(cb) {
     getProductsFromFile(cb);
