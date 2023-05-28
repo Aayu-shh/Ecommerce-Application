@@ -1,3 +1,5 @@
+// nOTE: EDIT functionality/ button working
+
 const fs = require('fs');
 const path = require('path');
 
@@ -24,8 +26,9 @@ exports.postAddProduct = (req, res, next) => {
   const price = req.body.price;
   const description = req.body.description;
   const product = new Product(id, title, imageUrl, description, price);
-  product.save();
-  res.redirect('/');
+  product.save()
+    .then(() => res.redirect('/'))
+    .catch(err => console.log(err));
 };
 
 exports.getEditProduct = (req, res, next) => {
@@ -61,12 +64,14 @@ exports.postEditProduct = (req,res,next)=>{
 exports.postDeleteProduct = (req,res,next) => {
   const prodId = req.params.productId;
 
-  Product.deleteProductById(prodId);
-    res.redirect('/admin/products');
+  Product.deleteProductById(prodId)
+  .then(() => res.redirect('/admin/products'))
+  .catch(err=>console.log(err));
 }
 
 exports.getProducts = (req, res, next) => {
-  Product.fetchAll(products => {
+  Product.fetchAll()
+  .then(( [products] ) => {
     res.render('admin/products', {
       prods: products,
       pageTitle: 'Admin Products',

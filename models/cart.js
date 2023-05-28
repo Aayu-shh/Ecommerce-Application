@@ -1,3 +1,5 @@
+//!!!!!!!!! To modify for Working CART functionality  => Add Product to Cart
+//NOTE : CART is Currently Broken
 const fs = require('fs');
 const path = require('path');
 
