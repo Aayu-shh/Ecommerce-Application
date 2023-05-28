@@ -37,7 +37,8 @@ exports.getEditProduct = (req, res, next) => {
     return res.redirect('/');
   }
   const prodId = req.params.productId;
-  Product.findById(prodId, product=>{
+  Product.findById(prodId)
+  .then( ([[product]]) =>{
     if(!product){
       return res.redirect('/');
     }
@@ -57,8 +58,8 @@ exports.postEditProduct = (req,res,next)=>{
   const updatedImageUrl = req.body.imageUrl;
   const updatedDescription = req.body.description;
   const updatedProduct = new Product(prodId, updatedTitle, updatedImageUrl, updatedDescription, updatedPrice);
-  updatedProduct.save();
-  res.redirect(`/admin/products`);
+  updatedProduct.save()
+  .then(()=>res.redirect(`/admin/products`));
 };
 
 exports.postDeleteProduct = (req,res,next) => {
