@@ -3,8 +3,8 @@ const Product = require('../models/product');
 const Cart = require('../models/cart');
 
 exports.getProducts = (req, res, next) => {
-  Product.fetchAll()
-    .then(([products, fieldData]) => {
+  Product.findAll()
+    .then((products) => {
       res.render('shop/product-list', {
         prods: products,
         pageTitle: 'All Products',
@@ -16,15 +16,16 @@ exports.getProducts = (req, res, next) => {
 
 exports.getProduct = (req, res, next) => {
   const prodId = req.params.productId;
-  Product.findById(prodId)                                      //[[product]] --> Because product details(Single) INSIDE array INSIDE another array with products and MetaData
-  .then(([[product]]) => {
+  Product.findByPk(prodId)                                      //[[product]] --> Because product details(Single) INSIDE array INSIDE another array with products and MetaData
+  .then(product => {
     res.render('shop/product-detail', { product: product, pageTitle: product.title, path: '/products' });
-  });
+  })
+  .catch(err => console.log(err));
 }
 
 exports.getIndex = (req, res, next) => {
-  Product.fetchAll()
-    .then(([products, fieldData]) => {
+  Product.findAll()
+    .then((products) => {
       res.render('shop/index', {
         prods: products,
         pageTitle: 'Shop',
@@ -43,8 +44,8 @@ exports.getCart = (req, res, next) => {
 
 exports.postCart = (req, res, next) => {
   const prodId = req.body.productId;
-  Product.findById(prodId)
-  .then( ( [[product]] ) => {
+  Product.findByPk(prodId)
+  .then(product => {
     Cart.addProduct(prodId, product.price);
   });
   res.redirect('/cart');

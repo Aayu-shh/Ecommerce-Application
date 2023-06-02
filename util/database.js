@@ -1,10 +1,5 @@
-const mysql = require('mysql2');
+const {Sequelize} = require('sequelize');           //Curly braces to enable IntelliSense ~ Code help while typing
 
-const pool = mysql.createPool({
-    host: 'localhost',
-    user: 'root',
-    database: 'node-complete',
-    password: '#Ash28jun#'
-})
+const sequelize = new Sequelize('node-complete', 'root', '#Ash28jun#', { dialect: 'mysql', host: 'localhost' });
 
-module.exports = pool.promise();
+module.exports = sequelize;
