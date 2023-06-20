@@ -34,6 +34,7 @@ app.use(errorController.get404);
 
 //User CREATED this product
 Product.belongsTo(User,{constraints: true, onDelete: 'CASCADE'});             //onDelete => OnDeleteing User, Product data it created also DELETED          
+
 User.hasMany(Product);
 
 sequelize
