@@ -86,14 +86,10 @@ exports.postCart = (req, res, next) => {
 };
 
 exports.deleteCartItem = (req, res, next) => {
-  const prodId = req.body.productId;
-  CartItem.findAll({
-    where: {
-      productId: prodId
-    }
-  })
+  const cartItemId = req.body.cartItemId;
+  CartItem.findByPk(cartItemId)
     .then(cartItem => {
-      return cartItem[0].destroy()
+      return cartItem.destroy()
     })
     .then(() => res.redirect('/cart'))
     .catch(err => console.log(err));
