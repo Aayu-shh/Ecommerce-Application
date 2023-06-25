@@ -1,8 +1,18 @@
 # Backend_Development_EJS
 
-This file contains complete Model View Controller Format JS code for a simple shopping website. 
+A full stack E-commerce application in making with fully functional pages providing features as mentioned below.
 
-**WHat you can do with the website?**
-* Add a Book -> Enter Title in the Add Product Page.
-* View the Books -> Once, you add a book, you are redirected to root page / Shop NavBar page, holding all your inventory
+## What you can do with the website?
+* Add a Product 
+* View the Products on Shop/Products Page
+* Edit Product
+* Delete Product
+* Add to a Product Cart
+* Delete Product from Cart
+* 
+## Technologies Used
+
+- FrontEnd: HTML, JavaScript (with EJS) and Bootstrap CSS
+- BackEnd: Node.js, Express.js
+- Database: MySQL, Sequleize
 
