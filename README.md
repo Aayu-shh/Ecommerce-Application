@@ -1,4 +1,4 @@
-# Backend_Development_EJS
+# Ecommerce Application
 
 A full stack E-commerce application in making with fully functional pages providing features as mentioned below.
 
